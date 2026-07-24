@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ApexFlow Systems CEO Executive Command Engine - Enterprise B2B SaaS Performance Analytics & Decision System">
+  <meta name="theme-color" content="#0B1120">
+  
+  <title>ApexFlow Systems | Executive Command & Decision Engine</title>
+
+  <!-- Typography & Libraries -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="app-root" class="app-shell">
+    
+    <!-- PRIMARY NAVIGATION SIDEBAR -->
+    <aside class="app-sidebar" aria-label="Main Navigation">
+      <div class="brand-header">
+        <div class="brand-logo" aria-hidden="true">▲</div>
+        <div class="brand-details">
+          <span class="brand-name">ApexFlow</span>
+          <span class="brand-tagline">EXECUTIVE COMMAND ENGINE</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu" aria-label="Primary Dashboard Navigation">
+        <a href="#dashboard" class="nav-link active" data-view-target="dashboard" id="nav-dashboard" aria-current="page">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          </svg>
+          <span>CEO Dashboard</span>
+        </a>
+
+        <a href="#deck" class="nav-link" data-view-target="deck" id="nav-deck">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <span>Executive Deck (8)</span>
+        </a>
+
+        <a href="#revenue" class="nav-link" data-view-target="revenue" id="nav-revenue">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 6v12M9 9h6a2 2 0 0 1 0 4H9a2 2 0 0 0 0 4h6"/>
+          </svg>
+          <span>Revenue Deep-Dive</span>
+        </a>
+
+        <a href="#sales" class="nav-link" data-view-target="sales" id="nav-sales">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+          <span>Sales & GTM</span>
+        </a>
+
+        <a href="#customers" class="nav-link" data-view-target="customers" id="nav-customers">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <span>Customer Retention</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- MAIN VIEWPORT CONTENT AREA -->
+    <div class="app-viewport">
+      
+      <!-- TOP NAVIGATION NAVBAR -->
+      <header class="top-navbar" role="banner">
+        <h1 class="page-title" id="active-view-title">CEO Command Dashboard</h1>
+        
+        <div class="navbar-actions">
+          
+          <!-- RAG STATUS LEGEND -->
+          <div class="status-legend" aria-label="Status Legend">
+            <span class="legend-badge status-green"><span class="badge-dot"></span> 🟢 Healthy</span>
+            <span class="legend-badge status-yellow"><span class="badge-dot"></span> 🟡 Monitor</span>
+            <span class="legend-badge status-red"><span class="badge-dot"></span> 🔴 Critical</span>
+          </div>
+
+          <!-- REGION SELECTOR -->
+          <div class="form-control-wrap">
+            <label for="region-selector" class="sr-only">Select Region Filter</label>
+            <select id="region-selector" class="select-input">
+              <option value="all">Region: ALL (India & US)</option>
+              <option value="in">Region: India Enterprise</option>
+              <option value="us">Region: US Enterprise</option>
+            </select>
+          </div>
+
+          <!-- RAG FILTER DROPDOWN -->
+          <div class="form-control-wrap">
+            <label for="rag-filter-select" class="sr-only">Filter Metrics by RAG Status</label>
+            <select id="rag-filter-select" class="select-input">
+              <option value="all">RAG: All 12 Metrics</option>
+              <option value="red">🔴 Critical Alerts (6)</option>
+              <option value="yellow">🟡 Warnings (5)</option>
+            </select>
+          </div>
+
+          <!-- NOTIFICATION ACTION BUTTON -->
+          <button class="icon-button" aria-label="View Alerts (3 New Alerts)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="icon-badge"></span>
+          </button>
+
+          <!-- USER PROFILE CARD -->
+          <div class="profile-card" title="Logged in as CEO">
+            <div class="avatar-badge">CEO</div>
+            <span class="user-name">ApexFlow</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- EXECUTIVE ALERT TICKER -->
+      <section class="alert-ticker-bar" role="region" aria-label="Critical Executive Alerts">
+        <div class="ticker-wrapper">
+          <div class="ticker-item"><span class="alert-pill">ALERT 1</span> <span>Sales Win Rate dropped 700bps (23% ➔ 16%) in Dec</span></div>
+          <div class="ticker-item"><span class="alert-pill">ALERT 2</span> <span>11 Accounts At-Risk (Potential ARR Exposure: ~₹1.02Cr Estimated)</span></div>
+          <div class="ticker-item"><span class="alert-pill">ALERT 3</span> <span>Runway at 11 Months (Net Burn ₹62L/mo)</span></div>
+        </div>
+      </section>
+
+      <!-- SECTION 1: MAIN CEO COMMAND DASHBOARD VIEW -->
+      <main id="view-dashboard" class="content-panel view-panel active" aria-labelledby="active-view-title">
+        
+        <!-- PRIMARY METRICS GRID (6 COLUMNS) -->
+        <section class="metrics-grid" aria-label="Executive Primary Metrics">
+          
+          <article class="metric-card" data-rag-status="red">
+            <header class="metric-card-header">
+              <h2 class="metric-title">ARR & MRR Growth</h2>
+              <span class="status-indicator red" aria-label="Status Critical">🔴</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">₹9.36 Cr</span>
+              <span class="metric-subtitle">MRR: ₹78.0 Lakhs | Dec Won: ₹1.3Cr 📉</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Definition:</strong> Annualized recurring revenue scaling benchmark</p>
+              <p><strong>Formula:</strong> MRR (₹78.0L) × 12</p>
+              <p><strong>Business Leverage:</strong> Dictates scaling capacity and burn ceiling</p>
+              <p><strong>Owner:</strong> CFO | <strong>SLA:</strong> Daily</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="red">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Net Runway</h2>
+              <span class="status-indicator red" aria-label="Status Critical">🔴</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">11.0 Mo</span>
+              <span class="metric-subtitle">Burn: ₹62L/mo | Target: >18 Mo</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Definition:</strong> Cash solvency horizon prior to capital depletion</p>
+              <p><strong>Formula:</strong> Cash Reserves / Monthly Net Burn (₹62L)</p>
+              <p><strong>Business Leverage:</strong> Dictates Series A timing vs expense reductions</p>
+              <p><strong>Owner:</strong> CFO / CEO | <strong>SLA:</strong> Weekly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="red">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Sales Win Rate</h2>
+              <span class="status-indicator red" aria-label="Status Critical">🔴</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">16.0%</span>
+              <span class="metric-subtitle">Oct 23% ➔ Dec 16% | Target: 25%</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Definition:</strong> Opportunity conversion efficiency</p>
+              <p><strong>Formula:</strong> Closed Won Deals / Pipeline Opportunities</p>
+              <p><strong>Business Leverage:</strong> Measures Stage 2 qualification rigor</p>
+              <p><strong>Owner:</strong> VP Sales | <strong>SLA:</strong> Weekly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="green">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Webinar Cost per SQL</h2>
+              <span class="status-indicator green" aria-label="Status Healthy">🟢</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">₹26.7k</span>
+              <span class="metric-subtitle">LinkedIn: ₹57.9k | Lead-to-SQL: 50%</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Definition:</strong> Unit acquisition cost per Sales Qualified Lead</p>
+              <p><strong>Formula:</strong> Marketing Spend (₹8L) / 30 SQLs</p>
+              <p><strong>Business Leverage:</strong> Highest ROI channel for budget shift</p>
+              <p><strong>Owner:</strong> CMO | <strong>SLA:</strong> Weekly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="red">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Qtr Churn Rate</h2>
+              <span class="status-indicator red" aria-label="Status Critical">🔴</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">6.8%</span>
+              <span class="metric-subtitle">84 Active Clients | Target: &lt;3.0%</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Definition:</strong> Quarterly revenue retention leakage</p>
+              <p><strong>Formula:</strong> Lost ARR / Starting ARR</p>
+              <p><strong>Business Leverage:</strong> Erodes SaaS compounding growth</p>
+              <p><strong>Owner:</strong> VP Customer Success | <strong>SLA:</strong> Weekly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="red">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Estimated ARR at Risk ⓘ</h2>
+              <span class="status-indicator red" aria-label="Status Critical">🔴</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">11 Accts</span>
+              <span class="metric-subtitle">13.1% of base | Exposure: ~₹1.02Cr (Est)</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Definition:</strong> Accounts with Health Score &lt; 65 showing churn risk</p>
+              <p><strong>Formula:</strong> Count(Health &lt; 65)</p>
+              <p><strong>Analytical Note:</strong> ARR exposure (~₹1.02Cr) is an analytical estimate because customer-level ARR is unlisted in dataset</p>
+              <p><strong>Owner:</strong> VP CS | <strong>SLA:</strong> Daily</p>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- VISUAL ANALYTICS MIDDLE ROW (3 PANELS) -->
+        <section class="analytics-row" aria-label="Visual Analytics Diagnostics">
+          
+          <!-- CHART PANEL 1: REVENUE DIVERGENCE -->
+          <div class="panel-card flex-2">
+            <header class="panel-header">
+              <div>
+                <h2 class="panel-title">📈 Q4 Revenue Predictability & Win Rate Divergence</h2>
+                <p class="panel-subtitle">Pipeline Up +30.6% (₹6.2Cr ➔ ₹8.1Cr), Closed Won Down -18.8% in Dec</p>
+              </div>
+            </header>
+            <div class="chart-container">
+              <canvas id="chart-revenue-divergence"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART PANEL 2: CAC ROI DONUT -->
+          <div class="panel-card flex-1-2">
+            <header class="panel-header">
+              <div>
+                <h2 class="panel-title">🎯 GTM Marketing Channel CAC ROI</h2>
+                <p class="panel-subtitle">Reallocate ₹10L from LinkedIn to Webinars</p>
+              </div>
+            </header>
+            <div class="chart-container">
+              <canvas id="chart-marketing-cac"></canvas>
+            </div>
+          </div>
+
+          <!-- GAUGE PANEL 3: HEALTH SCORE -->
+          <div class="panel-card flex-1">
+            <header class="panel-header">
+              <h2 class="panel-title">Avg Health Score</h2>
+              <span class="info-badge" title="Composite health index across 84 enterprise accounts">ⓘ</span>
+            </header>
+            
+            <div class="gauge-wrapper">
+              <div class="gauge-canvas-box">
+                <canvas id="chart-health-gauge"></canvas>
+                <div class="gauge-center-text">
+                  <span class="gauge-value">71</span>
+                </div>
+              </div>
+              <span class="gauge-status-badge status-text-yellow">Warning 🟡 (Target: &gt;80)</span>
+            </div>
+
+            <div class="gauge-metrics-list">
+              <div class="gauge-metric-item">
+                <div class="metric-meta-row">
+                  <span><span class="dot-yellow"></span> Feature Adoption</span>
+                  <span class="metric-num">62.0%</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill yellow" style="width: 62%;"></div></div>
+              </div>
+              <div class="gauge-metric-item">
+                <div class="metric-meta-row">
+                  <span><span class="dot-red"></span> Critical Open Bugs</span>
+                  <span class="metric-num">14 Bugs</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill red" style="width: 70%;"></div></div>
+              </div>
+              <div class="gauge-metric-item">
+                <div class="metric-meta-row">
+                  <span><span class="dot-red"></span> Reporting Automation (Est)</span>
+                  <span class="metric-num">0.0%</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill red" style="width: 0%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- SECONDARY METRICS GRID (6 COLUMNS) -->
+        <section class="metrics-grid" aria-label="Departmental Operational Metrics">
+          
+          <article class="metric-card" data-rag-status="yellow">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Avg Account Health</h2>
+              <span class="status-indicator yellow" aria-label="Status Warning">🟡</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">71 / 100</span>
+              <span class="metric-subtitle">84 Active Clients | Target: &gt;80</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Formula:</strong> Sum(Health Scores)/84</p>
+              <p><strong>Owner:</strong> VP Customer Success | <strong>SLA:</strong> Monthly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="yellow">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Feature Adoption</h2>
+              <span class="status-indicator yellow" aria-label="Status Warning">🟡</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">62.0%</span>
+              <span class="metric-subtitle">MAU: 1,150 | Target: &gt;75%</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Formula:</strong> Core Feature MAU / Total MAU</p>
+              <p><strong>Owner:</strong> VP Product | <strong>SLA:</strong> Monthly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="red">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Critical Open Bugs</h2>
+              <span class="status-indicator red" aria-label="Status Critical">🔴</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">14 Bugs</span>
+              <span class="metric-subtitle">21d Release Cycle | Target: &lt;3</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Formula:</strong> Sum(P0/P1 Open Defects)</p>
+              <p><strong>Owner:</strong> VP Engineering | <strong>SLA:</strong> Daily</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="yellow">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Employee Attrition</h2>
+              <span class="status-indicator yellow" aria-label="Status Warning">🟡</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">18.0%</span>
+              <span class="metric-subtitle">42 Headcount | 7 Open Roles</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Formula:</strong> Departures / Total Headcount</p>
+              <p><strong>Owner:</strong> Head of HR | <strong>SLA:</strong> Monthly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="yellow">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Hiring Time-to-Fill</h2>
+              <span class="status-indicator yellow" aria-label="Status Warning">🟡</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">41 Days</span>
+              <span class="metric-subtitle">7 Open Roles | Target: &lt;25 Days</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Formula:</strong> Requisition Days to Acceptance</p>
+              <p><strong>Owner:</strong> Head of HR | <strong>SLA:</strong> Monthly</p>
+            </div>
+          </article>
+
+          <article class="metric-card" data-rag-status="red">
+            <header class="metric-card-header">
+              <h2 class="metric-title">Reporting Automation (Est) ⓘ</h2>
+              <span class="status-indicator red" aria-label="Status Critical">🔴</span>
+            </header>
+            <div class="metric-body">
+              <span class="metric-value">0.0%</span>
+              <span class="metric-subtitle">27 Manual Reports/mo | 9 Tools</span>
+            </div>
+            <div class="metric-tooltip" role="tooltip">
+              <p><strong>Analytical Note:</strong> 0% automation is inferred because 27 manual reports and 0 data owners are stated without an explicit automation metric.</p>
+              <p><strong>Owner:</strong> Head of Operations | <strong>SLA:</strong> Weekly</p>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- ANALYST ASSUMPTIONS & MISSING DATA SECTION -->
+        <section class="analytics-row" aria-label="Analytical Methodology and Missing Data Audit">
+          
+          <div class="panel-card flex-1">
+            <header class="panel-header">
+              <h2 class="panel-title">📌 Assumptions & Analytical Methodology</h2>
+            </header>
+            <ul class="bullet-list">
+              <li>• <strong>Illustrative Sample Data:</strong> Customer names in retention rosters are demo placeholders (unlisted in dataset).</li>
+              <li>• <strong>Estimated ARR Exposure:</strong> Potential ARR at risk (~₹1.02Cr) is an analytical inference from 11 At-Risk accounts.</li>
+              <li>• <strong>Inferred Automation Coverage:</strong> 0% automation is derived from 27 manual reports/mo and 0 data owners.</li>
+              <li>• <strong>Benchmarking Targets:</strong> Departmental targets (e.g. Win Rate &gt;25%, Health &gt;80) are assumed for diagnostic comparison.</li>
+              <li>• <strong>Fact Preservation:</strong> Core metrics (₹9.36Cr ARR, 11 Mo Runway, 16% Win Rate, ₹26.7k CAC) strictly match assignment data.</li>
+            </ul>
+          </div>
+
+          <div class="panel-card flex-1 accent-border-left">
+            <header class="panel-header">
+              <h2 class="panel-title">🔍 Missing Data Identified (Analyst Assessment)</h2>
+            </header>
+            <ul class="bullet-list">
+              <li>• <strong>Customer-Level ARR:</strong> Individual account contract values are unlisted.</li>
+              <li>• <strong>CAC Payback Period:</strong> Time horizon to recover acquisition cost is missing.</li>
+              <li>• <strong>Net Revenue Retention (NRR):</strong> Expansion ARR vs Contraction ARR is not broken down.</li>
+              <li>• <strong>Cash Reserves Balance:</strong> Total cash pool is inferred from Runway × Net Burn.</li>
+              <li>• <strong>Sales Cycle Duration:</strong> Average days to close pipeline opportunities is unrecorded.</li>
+              <li>• <strong>Segmented Feature Adoption:</strong> Adoption rates broken down by Enterprise vs SMB are absent.</li>
+            </ul>
+            <footer class="quote-footer">
+              <em>"Exceptional Business Analysts identify missing data instead of making unsupported assumptions."</em>
+            </footer>
+          </div>
+
+        </section>
+
+        <!-- TOP 3 CEO DECISION QUEUE -->
+        <section class="panel-card" aria-label="Weekly CEO Executive Decision Queue">
+          <header class="panel-header">
+            <div>
+              <h2 class="panel-title">⚡ TOP 3 WEEKLY CEO EXECUTIVE DECISION QUEUE</h2>
+              <p class="panel-subtitle">Prioritized high-leverage action items for immediate executive execution</p>
+            </div>
+          </header>
+          
+          <div class="decision-queue-container">
+            <div class="decision-item">
+              <span class="decision-index">1</span>
+              <div class="decision-text">
+                <strong>APPROVE GTM BUDGET REALLOCATION:</strong> Shift ₹10L from LinkedIn Ads to Webinars immediately. Expected ROI: <strong>+22 additional SQLs/month</strong> at zero incremental cost.
+              </div>
+            </div>
+            
+            <div class="decision-item">
+              <span class="decision-index">2</span>
+              <div class="decision-text">
+                <strong>ENFORCE MEDDPICC STAGE 2 GATING:</strong> Mandate Stage 2 CRM qualification to eliminate unqualified pipeline bloat and restore Win Rate from 16% to 23%.
+              </div>
+            </div>
+
+            <div class="decision-item">
+              <span class="decision-index">3</span>
+              <div class="decision-text">
+                <strong>LAUNCH CS AT-RISK RETENTION SPRINT:</strong> Mobilize Executive Sponsor outreach to top 11 At-Risk accounts to safeguard <strong>potential ARR at risk</strong>.
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SECTION 2: PRESENTATION SLIDE DECK VIEW (8 INTERACTIVE SLIDES) -->
+      <section id="view-deck" class="content-panel view-panel" aria-label="Interactive Executive Slide Deck">
+        
+        <div class="deck-toolbar">
+          <div class="deck-nav-group">
+            <button id="btn-prev-slide" class="btn-action" disabled aria-label="Previous Slide">◄ Previous Slide</button>
+            <button id="btn-next-slide" class="btn-action" aria-label="Next Slide">Next Slide ►</button>
+            <span id="slide-indicator" class="slide-indicator-text">Slide 1 of 8</span>
+          </div>
+
+          <div class="form-control-wrap">
+            <label for="select-slide-jump" class="sr-only">Jump to Slide</label>
+            <select id="select-slide-jump" class="select-input">
+              <option value="1">Slide 1: Executive Cover Page</option>
+              <option value="2">Slide 2: CEO Executive Summary</option>
+              <option value="3">Slide 3: Part A - CEO Dashboard (12 KPIs)</option>
+              <option value="4">Slide 4: Chief of Staff Missing Data Analysis</option>
+              <option value="5">Slide 5: Part B - 5 Cross-Functional Insights</option>
+              <option value="6">Slide 6: Part C - Automation & Data Architecture</option>
+              <option value="7">Slide 7: Part D - Revenue Predictability Deep Dive</option>
+              <option value="8">Slide 8: Strategic Prioritization & Top 5 Priorities</option>
+            </select>
+          </div>
+        </div>
+
+        <article class="slide-canvas">
+          
+          <div id="slide-pane-1" class="slide-pane active">
+            <span class="slide-badge">SLIDE 1 OF 8 | COVER PAGE</span>
+            <h2 class="slide-heading">ApexFlow Systems: CEO Executive Command & Decision System</h2>
+            <p class="slide-lead">
+              Assignment Submission: Business Analyst to CEO Internship.<br>
+              Designing an enterprise decision system, not just a report. Built for Chief Executive Leadership to diagnose organizational health, resolve cross-functional bottlenecks, and execute weekly high-leverage decisions.
+            </p>
+          </div>
+
+          <div id="slide-pane-2" class="slide-pane">
+            <span class="slide-badge">SLIDE 2 OF 8 | EXECUTIVE SUMMARY</span>
+            <h2 class="slide-heading">CEO Executive Summary & Diagnostic Scorecard</h2>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr><th>Department</th><th>Health Status</th><th>Core Metric Trend</th><th>Primary Bottleneck / Root Cause</th><th>CEO Decision Required</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Sales</strong></td><td><span class="badge-pill red">🔴 CRITICAL</span></td><td>Win Rate dropped 23% ➔ 16%</td><td>Unqualified pipeline bloat</td><td>Enforce MEDDPICC Stage 2 CRM Gating</td></tr>
+                  <tr><td><strong>Marketing</strong></td><td><span class="badge-pill yellow">🟡 WARNING</span></td><td>LinkedIn ₹57.9k vs Webinar ₹26.7k</td><td>45.8% spend allocated to low-yield channel</td><td>Reallocate ₹10L from LinkedIn to Webinars</td></tr>
+                  <tr><td><strong>Product</strong></td><td><span class="badge-pill yellow">🟡 WARNING</span></td><td>14 Critical Bugs open; 21d cycle</td><td>Tech debt impacting stability & CS</td><td>Freeze non-core features; 2-week bug sprint</td></tr>
+                  <tr><td><strong>Customer Success</strong></td><td><span class="badge-pill red">🔴 CRITICAL</span></td><td>6.8% Qtr Churn; 11 At-Risk Accounts</td><td>Customer Health Score depressed at 71/100</td><td>Executive Sponsor outreach for top 11 accounts</td></tr>
+                  <tr><td><strong>Finance</strong></td><td><span class="badge-pill red">🔴 CRITICAL</span></td><td>Runway at 11 Months (Burn ₹62L/mo)</td><td>Net monthly burn is 79.5% of MRR (₹78L)</td><td>Drive net retention &gt;110% to offset burn rate</td></tr>
+                  <tr><td><strong>HR / People</strong></td><td><span class="badge-pill yellow">🟡 WARNING</span></td><td>18% Attrition; 41-day Time-to-Hire</td><td>Talent leakage slowing velocity</td><td>Standardize onboarding & compensation equity</td></tr>
+                  <tr><td><strong>Operations</strong></td><td><span class="badge-pill red">🔴 CRITICAL</span></td><td>27 Manual Reports/mo; 0 Data Owners</td><td>Reporting drag; 6-8 ad-hoc CEO requests/wk</td><td>Automate Data Warehouse pipeline & CEO Board</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="slide-pane-3" class="slide-pane">
+            <span class="slide-badge">SLIDE 3 OF 8 | PART A: CEO DASHBOARD SPECIFICATION</span>
+            <h2 class="slide-heading">Part A – CEO Dashboard: 12 Vital Executive Metrics</h2>
+            <div class="table-responsive">
+              <table class="data-table font-sm">
+                <thead>
+                  <tr><th>KPI Name</th><th>What It Shows</th><th>Why CEO Should Care</th><th>Decision Enabled</th><th>Owner</th><th>SLA</th><th>RAG</th><th>Target</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>1. ARR & MRR Growth</strong></td><td>MRR ₹78L × 12 = ₹9.36 Cr ARR</td><td>Governs scale & burn runway</td><td>Approve growth hiring vs freeze</td><td>CFO</td><td>Daily</td><td><span class="badge-pill red">🔴</span></td><td>₹12.0 Cr ARR</td></tr>
+                  <tr><td><strong>2. Net Runway</strong></td><td>Cash / Monthly Burn (₹62L)</td><td>Solvency horizon tracking (11 Mo)</td><td>Series A raise vs 15% burn cut</td><td>CFO/CEO</td><td>Weekly</td><td><span class="badge-pill red">🔴</span></td><td>&gt;18 Mo</td></tr>
+                  <tr><td><strong>3. Sales Win Rate</strong></td><td>Closed Won / Pipeline (23%➔16%)</td><td>GTM qualification rigor</td><td>Enforce MEDDPICC CRM Stage 2 Gate</td><td>VP Sales</td><td>Weekly</td><td><span class="badge-pill red">🔴</span></td><td>25.0%</td></tr>
+                  <tr><td><strong>4. Webinar Cost per SQL</strong></td><td>Spend (₹8L) / 30 SQLs = ₹26.7k</td><td>Highest ROI acquisition channel</td><td>Reallocate ₹10L spend from LinkedIn</td><td>CMO</td><td>Weekly</td><td><span class="badge-pill green">🟢</span></td><td>&lt;₹30k</td></tr>
+                  <tr><td><strong>5. Qtr Churn Rate</strong></td><td>Lost ARR / Start ARR (6.8% Qtr)</td><td>Destroys SaaS compounding growth</td><td>Mandate CS Save Desk</td><td>VP CS</td><td>Weekly</td><td><span class="badge-pill red">🔴</span></td><td>&lt;3.0%</td></tr>
+                  <tr><td><strong>6. At-Risk Accounts (Est)</strong></td><td>11 Accounts (13.1% of base)</td><td>Early warning revenue cancellation</td><td>CEO Executive Sponsor call</td><td>VP CS</td><td>Daily</td><td><span class="badge-pill red">🔴</span></td><td>0 Accts</td></tr>
+                  <tr><td><strong>7. Avg Account Health</strong></td><td>71 / 100 across 84 Accounts</td><td>Leading indicator of 60d renewal</td><td>Trigger automated CS playbooks</td><td>VP CS</td><td>Monthly</td><td><span class="badge-pill yellow">🟡</span></td><td>&gt;80 / 100</td></tr>
+                  <tr><td><strong>8. Feature Adoption</strong></td><td>Core Feature Users / MAU (62%)</td><td>Drives sticky usage and retention</td><td>Redesign UX onboarding flows</td><td>VP Prod</td><td>Monthly</td><td><span class="badge-pill yellow">🟡</span></td><td>&gt;75%</td></tr>
+                  <tr><td><strong>9. Critical Open Bugs</strong></td><td>Sum(P0/P1 Open Defects = 14)</td><td>Platform stability & customer trust</td><td>Institute 1-week Bug Freeze sprint</td><td>VP Eng</td><td>Daily</td><td><span class="badge-pill red">🔴</span></td><td>&lt;3 Open</td></tr>
+                  <tr><td><strong>10. Employee Attrition</strong></td><td>Departures / Headcount (18%)</td><td>Key talent loss halts velocity</td><td>Overhaul retention & stay interviews</td><td>Head HR</td><td>Monthly</td><td><span class="badge-pill yellow">🟡</span></td><td>&lt;10%</td></tr>
+                  <tr><td><strong>11. Hiring Time-to-Fill</strong></td><td>Days from Req to Accept (41d)</td><td>Slow hiring bottlenecks execution</td><td>Streamline interview stages (5 to 3)</td><td>Head HR</td><td>Monthly</td><td><span class="badge-pill yellow">🟡</span></td><td>&lt;25 Days</td></tr>
+                  <tr><td><strong>12. Reporting Automation (Est)</strong></td><td>0.0% (Inferred from 27 Reports)</td><td>Manual reporting wastes 60+ hrs</td><td>Deploy automated DW ETL</td><td>Head Ops</td><td>Weekly</td><td><span class="badge-pill red">🔴</span></td><td>100%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="slide-pane-4" class="slide-pane">
+            <span class="slide-badge">SLIDE 4 OF 8 | MISSING DATA ANALYSIS</span>
+            <h2 class="slide-heading">Chief of Staff Analysis: Identifying Critical Missing Data</h2>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead><tr><th>Missing Metric</th><th>Why It Is Missing</th><th>Business Impact on CEO Decisions</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>1. CAC Payback Period</strong> (Target: &lt;12 Mo)</td><td>Sales & Marketing spend analyzed in isolation without payback time horizon</td><td>CEO cannot evaluate whether scaling ad spend creates long-term enterprise value</td></tr>
+                  <tr><td><strong>2. SDR-to-AE Handoff Conversion Rate</strong> (Target: &gt;65%)</td><td>Funnel tracked only at SQL level; Stage 1-to-2 handoff loss unmeasured</td><td>Hides sales rep productivity bottlenecks; SDRs may generate low-intent SQLs</td></tr>
+                  <tr><td><strong>3. Logo Churn vs. ARR Churn</strong> (Target: Logo Churn &lt;2%)</td><td>Only dollar churn reported; customer logo count loss obscured</td><td>Hides whether churn is concentrated in SMB vs enterprise tier</td></tr>
+                  <tr><td><strong>4. Net Promoter Score (NPS)</strong> (Target: &gt;50)</td><td>Product tracks usage, CS tracks Health Score; no qualitative sentiment data</td><td>Gives 60-day advance warning before accounts become "At-Risk"</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="slide-pane-5" class="slide-pane">
+            <span class="slide-badge">SLIDE 5 OF 8 | PART B: 5 EXECUTIVE INSIGHTS</span>
+            <h2 class="slide-heading">Part B – Five Cross-Functional Weekly Executive Insights</h2>
+            <div class="stack-list">
+              <div class="insight-card border-green">
+                <strong>⚡ INSIGHT 1 (Marketing ➔ Sales): Reallocate ₹10L to Webinars</strong>
+                <p>LinkedIn Ads consume 45.8% of spend (₹22L) at ₹57.9k/SQL. Webinars cost ₹26.7k/SQL with 50% Lead-to-SQL conversion. Shifting ₹10L unlocks +22 SQLs/month at zero extra cost.</p>
+              </div>
+              <div class="insight-card border-red">
+                <strong>⚡ INSIGHT 2 (Sales ➔ Revenue): Pipeline Inflation Masking Win Rate Collapse</strong>
+                <p>Pipeline grew +30.6% (₹6.2Cr ➔ ₹8.1Cr) while Win Rate collapsed from 23% to 16%, causing Closed Won ARR to drop. Mandate MEDDPICC at Stage 2.</p>
+              </div>
+              <div class="insight-card border-red">
+                <strong>⚡ INSIGHT 3 (Product ➔ CS): Tech Debt Driving 6.8% Churn</strong>
+                <p>14 critical bugs open and a 21-day release cycle depress Customer Health to 71/100, putting 11 accounts at risk. Execute a 2-week Bug Freeze Sprint.</p>
+              </div>
+              <div class="insight-card border-yellow">
+                <strong>⚡ INSIGHT 4 (HR ➔ Velocity): High Attrition & 41-Day Hiring Bottleneck</strong>
+                <p>18% attrition and 41-day hiring leave 7 key roles open, slowing velocity. Streamline technical interview stages from 5 to 3.</p>
+              </div>
+              <div class="insight-card border-red">
+                <strong>⚡ INSIGHT 5 (Ops ➔ Leadership): Reporting Chaos Draining CEO Productivity</strong>
+                <p>27 manual reports/month signify extreme operational drag. Deploy an automated Data Warehouse ETL pipeline and BI dashboard.</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="slide-pane-6" class="slide-pane">
+            <span class="slide-badge">SLIDE 6 OF 8 | PART C: AUTOMATION & DATA FLOW</span>
+            <h2 class="slide-heading">Part C – Automation & Enterprise Data Architecture</h2>
+            <div class="info-callout">
+              <p><strong>Single Source of Truth Architecture:</strong> Operational Systems (Salesforce, HubSpot, Google Ads, Jira, Stripe, Lever) ➔ Automated ETL Ingestion (Fivetran/Airbyte Daily at 2 AM) ➔ Data Warehouse (Snowflake/BigQuery with dbt models) ➔ Automated BI Executive Dashboard.</p>
+            </div>
+          </div>
+
+          <div id="slide-pane-7" class="slide-pane">
+            <span class="slide-badge">SLIDE 7 OF 8 | PART D: DEEP DIVE</span>
+            <h2 class="slide-heading">Part D – Deep Dive: Revenue Predictability Crisis</h2>
+            <p class="slide-subtext">Q4 Win Rate dropped from 23% to 16% despite pipeline expansion. Below are Q1 forecast scenarios:</p>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead><tr><th>Scenario</th><th>Q1 Pipeline</th><th>Win Rate</th><th>Q1 Won ARR</th><th>Runway Impact</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Status Quo</strong></td><td>₹8.5 Cr</td><td>16.0%</td><td>₹1.36 Cr</td><td>Runway deteriorates to 9.5 Months</td></tr>
+                  <tr><td><strong>MEDDPICC Gating</strong></td><td>₹6.8 Cr (Qualified)</td><td>23.0%</td><td>₹1.56 Cr</td><td>Extends Runway to 14.5 Months</td></tr>
+                  <tr><td><strong>MEDDPICC + Webinar Reallocation</strong></td><td>₹8.2 Cr (High-Intent)</td><td>25.0%</td><td>₹2.05 Cr</td><td>Extends Runway to &gt;18.0 Months 🟢</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="slide-pane-8" class="slide-pane">
+            <span class="slide-badge">SLIDE 8 OF 8 | STRATEGIC PRIORITIZATION</span>
+            <h2 class="slide-heading">Strategic Prioritization: Top 5 CEO Priority Action Matrix</h2>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead><tr><th>Priority Action</th><th>Impacted Metric</th><th>Expected ROI / Business Impact</th><th>Executive Owner</th><th>Target Timeline</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>1. Webinar Budget Shift</strong></td><td>Cost per SQL</td><td>+22 SQLs/mo at zero extra spend</td><td>CMO</td><td>Immediate (Week 1)</td></tr>
+                  <tr><td><strong>2. MEDDPICC Stage 2 Gate</strong></td><td>Sales Win Rate</td><td>Win Rate restored 16% ➔ 23%</td><td>VP Sales</td><td>Week 1 - Week 2</td></tr>
+                  <tr><td><strong>3. At-Risk Account Outreach</strong></td><td>Churn & NDR</td><td>Safeguards potential ARR at risk</td><td>VP CS & CEO</td><td>Week 1 - Week 3</td></tr>
+                  <tr><td><strong>4. Engineering Bug Freeze</strong></td><td>Critical Bugs</td><td>Bugs reduced 14 ➔ &lt;3; Health &gt;80</td><td>VP Eng</td><td>Week 2 - Week 3</td></tr>
+                  <tr><td><strong>5. Automated DW ETL Pipeline</strong></td><td>Reporting Automation</td><td>Saves 120 hrs/mo; 100% automation</td><td>Head Ops</td><td>Week 2 - Week 4</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </article>
+      </section>
+
+      <!-- SECTION 3: REVENUE & RUNWAY DEEP-DIVE VIEW -->
+      <section id="view-revenue" class="content-panel view-panel" aria-label="Revenue and Runway Financial Audit">
+        <div class="panel-card">
+          <header class="panel-header">
+            <div>
+              <h2 class="panel-title">💰 Revenue & Runway Sensitivity Analysis</h2>
+              <p class="panel-subtitle">Financial audit of ARR trajectory, monthly net burn rate, and runway scenarios</p>
+            </div>
+          </header>
+          
+          <div class="stats-row">
+            <div class="stat-box"><span class="stat-label">Annual Recurring Revenue</span><span class="stat-value">₹9.36 Cr</span><span class="stat-sub">MRR: ₹78.0 Lakhs</span></div>
+            <div class="stat-box"><span class="stat-label">Monthly Net Burn</span><span class="stat-value text-red">₹62.0 L</span><span class="stat-sub">79.5% of MRR</span></div>
+            <div class="stat-box"><span class="stat-label">Net Solvency Runway</span><span class="stat-value text-red">11.0 Mo</span><span class="stat-sub">Cash: ₹6.82 Cr</span></div>
+            <div class="stat-box"><span class="stat-label">Target Horizon</span><span class="stat-value text-green">&gt;18.0 Mo</span><span class="stat-sub">Series A Milestone</span></div>
+          </div>
+
+          <h3 class="section-subheading">Q1 Financial Runway Scenarios</h3>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Scenario</th><th>Q1 Pipeline</th><th>Win Rate</th><th>Q1 Won ARR</th><th>Net Monthly Burn</th><th>Solvency Runway</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Scenario A: Status Quo</strong></td><td>₹8.50 Cr</td><td>16.0%</td><td>₹1.36 Cr</td><td>₹62.0 L/mo</td><td><span class="badge-pill red">9.5 Months 🔴</span></td></tr>
+                <tr><td><strong>Scenario B: MEDDPICC Stage 2 CRM Gate</strong></td><td>₹6.80 Cr (Qualified)</td><td>23.0%</td><td>₹1.56 Cr</td><td>₹52.0 L/mo</td><td><span class="badge-pill yellow">14.5 Months 🟡</span></td></tr>
+                <tr><td><strong>Scenario C: MEDDPICC + Webinar Reallocation</strong></td><td>₹8.20 Cr (High-Intent)</td><td>25.0%</td><td>₹2.05 Cr</td><td>₹38.0 L/mo</td><td><span class="badge-pill green">&gt;18.0 Months 🟢</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: SALES & GTM PERFORMANCE VIEW -->
+      <section id="view-sales" class="content-panel view-panel" aria-label="Sales Funnel and Marketing CAC Unit Economics">
+        <div class="panel-card">
+          <header class="panel-header">
+            <div>
+              <h2 class="panel-title">📈 Sales Pipeline & Marketing CAC Unit Economics</h2>
+              <p class="panel-subtitle">Analyzing Win Rate collapse, pipeline bloat, and marketing channel ROI</p>
+            </div>
+          </header>
+
+          <div class="stats-row">
+            <div class="stat-box"><span class="stat-label">Q4 Pipeline Value</span><span class="stat-value">₹8.10 Cr</span><span class="stat-sub">Up +30% (from ₹6.2Cr)</span></div>
+            <div class="stat-box"><span class="stat-label">Sales Win Rate</span><span class="stat-value text-red">16.0%</span><span class="stat-sub">Oct 23% ➔ Dec 16% (Down 700bps)</span></div>
+            <div class="stat-box"><span class="stat-label">Webinar CAC</span><span class="stat-value text-green">₹26.7k</span><span class="stat-sub">30 SQLs | 50.0% Conversion</span></div>
+            <div class="stat-box"><span class="stat-label">LinkedIn CAC</span><span class="stat-value text-red">₹57.9k</span><span class="stat-sub">38 SQLs | 14.0% Conversion</span></div>
+          </div>
+
+          <h3 class="section-subheading">GTM Channel Performance & Unit Economics</h3>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Acquisition Channel</th><th>Quarterly Spend</th><th>SQL Yield</th><th>Cost per SQL</th><th>Lead-to-SQL Conv %</th><th>Recommended Action</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Webinars</strong></td><td>₹8.0 Lakhs</td><td>30 SQLs</td><td><span class="badge-pill green">₹26.7k / SQL</span></td><td>50.0%</td><td>Increase budget by +₹10L 🟢</td></tr>
+                <tr><td><strong>Google Ads</strong></td><td>₹18.0 Lakhs</td><td>40 SQLs</td><td><span class="badge-pill yellow">₹45.0k / SQL</span></td><td>28.0%</td><td>Maintain current budget 🟡</td></tr>
+                <tr><td><strong>LinkedIn Ads</strong></td><td>₹22.0 Lakhs (45.8%)</td><td>38 SQLs</td><td><span class="badge-pill red">₹57.9k / SQL</span></td><td>14.0%</td><td>Cut budget by -₹10L 🔴</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: CUSTOMER SUCCESS & AT-RISK ACCOUNTS VIEW -->
+      <section id="view-customers" class="content-panel view-panel" aria-label="Customer Health and At Risk Accounts Roster">
+        <div class="panel-card">
+          <header class="panel-header">
+            <div>
+              <h2 class="panel-title">👥 Customer Success Roster & At-Risk Account Audit</h2>
+              <p class="panel-subtitle">11 Accounts exposed to risk (13.1% of customer base)</p>
+            </div>
+            <span class="tag-badge yellow">Demo Customers (Illustrative Sample Data - Not Part of Assignment Dataset)</span>
+          </header>
+
+          <div class="stats-row">
+            <div class="stat-box"><span class="stat-label">Active Enterprise Clients</span><span class="stat-value">84 Accts</span><span class="stat-sub">Total Base</span></div>
+            <div class="stat-box"><span class="stat-label">Quarterly Churn Rate</span><span class="stat-value text-red">6.8%</span><span class="stat-sub">Target: &lt;3.0%</span></div>
+            <div class="stat-box"><span class="stat-label">At-Risk Accounts</span><span class="stat-value text-red">11 Accts</span><span class="stat-sub">13.1% of base</span></div>
+            <div class="stat-box"><span class="stat-label">Estimated ARR at Risk</span><span class="stat-value text-red">~₹1.02 Cr (Est)</span><span class="stat-sub">Analytical Estimate ⓘ</span></div>
+          </div>
+
+          <h3 class="section-subheading">Exposed Accounts Roster (Illustrative Sample Data)</h3>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Customer Identifier</th><th>Estimated ARR</th><th>Health Score</th><th>Primary Root Cause</th><th>Intervention Strategy</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Customer A</strong></td><td>₹18.5 Lakhs (Est)</td><td><span class="badge-pill red">54 / 100</span></td><td>P0 Bug blocking core reporting workflow</td><td>CEO Executive Sponsor Call + Priority Bug Patch</td></tr>
+                <tr><td><strong>Customer B</strong></td><td>₹14.2 Lakhs (Est)</td><td><span class="badge-pill red">58 / 100</span></td><td>Slow feature adoption (MAU &lt;40%)</td><td>CS Onboarding & Product Training Sprint</td></tr>
+                <tr><td><strong>Customer C</strong></td><td>₹12.0 Lakhs (Est)</td><td><span class="badge-pill red">61 / 100</span></td><td>High open support tickets (12 tickets)</td><td>Assign Dedicated Solutions Architect</td></tr>
+                <tr><td><strong>8 Additional Accounts</strong></td><td>₹57.3 Lakhs (Est)</td><td><span class="badge-pill yellow">62-64 / 100</span></td><td>Platform stability & API latency</td><td>Institute 2-Week Engineering Bug Freeze Sprint</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
