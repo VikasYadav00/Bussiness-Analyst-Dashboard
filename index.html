@@ -590,35 +590,234 @@
           <div id="slide-pane-5" class="slide-pane">
             <span class="slide-badge">SLIDE 5 OF 8 | PART B: 5 EXECUTIVE INSIGHTS</span>
             <h2 class="slide-heading">Part B – Five Cross-Functional Weekly Executive Insights</h2>
-            <div class="stack-list">
-              <div class="insight-card border-green">
-                <strong>⚡ INSIGHT 1 (Marketing ➔ Sales): Reallocate ₹10L to Webinars</strong>
-                <p>LinkedIn Ads consume 45.8% of spend (₹22L) at ₹57.9k/SQL. Webinars cost ₹26.7k/SQL with 50% Lead-to-SQL conversion. Shifting ₹10L unlocks +22 SQLs/month at zero extra cost.</p>
+            
+            <div class="insights-grid">
+              
+              <!-- Card 1 -->
+              <div class="insight-card border-green" data-insight-id="1">
+                <div class="insight-card-header">
+                  <span class="insight-flow-badge mkt-sales">Marketing ➔ Sales</span>
+                  <span class="status-indicator green">🟢</span>
+                </div>
+                <h3 class="insight-card-title">⚡ INSIGHT 1: Reallocate ₹10L to Webinars</h3>
+                <div class="insight-metrics-box">
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">LinkedIn SQL</span>
+                    <span class="insight-metric-tag-value red">₹57.9k</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Webinar SQL</span>
+                    <span class="insight-metric-tag-value green">₹26.7k</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Yield ROI</span>
+                    <span class="insight-metric-tag-value green">+22 SQLs</span>
+                  </div>
+                </div>
+                <p class="insight-card-text">LinkedIn Ads consume 45.8% of spend (₹22L) at ₹57.9k/SQL. Webinars cost ₹26.7k/SQL with 50% Lead-to-SQL conversion. Shifting ₹10L unlocks +22 SQLs/month at zero extra cost.</p>
+                <button class="btn-insight-action" data-action-text="Approve Budget Shift">Approve Budget Shift</button>
               </div>
-              <div class="insight-card border-red">
-                <strong>⚡ INSIGHT 2 (Sales ➔ Revenue): Pipeline Inflation Masking Win Rate Collapse</strong>
-                <p>Pipeline grew +30.6% (₹6.2Cr ➔ ₹8.1Cr) while Win Rate collapsed from 23% to 16%, causing Closed Won ARR to drop. Mandate MEDDPICC at Stage 2.</p>
+              
+              <!-- Card 2 -->
+              <div class="insight-card border-red" data-insight-id="2">
+                <div class="insight-card-header">
+                  <span class="insight-flow-badge sales-rev">Sales ➔ Revenue</span>
+                  <span class="status-indicator red">🔴</span>
+                </div>
+                <h3 class="insight-card-title">⚡ INSIGHT 2: Pipeline Inflation vs Win Rate Collapse</h3>
+                <div class="insight-metrics-box">
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Pipeline Growth</span>
+                    <span class="insight-metric-tag-value green">+30.6%</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Win Rate</span>
+                    <span class="insight-metric-tag-value red">23% ➔ 16%</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Status</span>
+                    <span class="insight-metric-tag-value red">Divergent</span>
+                  </div>
+                </div>
+                <p class="insight-card-text">Pipeline grew +30.6% (₹6.2Cr ➔ ₹8.1Cr) while Win Rate collapsed from 23% to 16%, causing Closed Won ARR to drop. Mandate MEDDPICC at Stage 2 CRM gating.</p>
+                <button class="btn-insight-action" data-action-text="Enforce CRM Gating">Enforce CRM Gating</button>
               </div>
-              <div class="insight-card border-red">
-                <strong>⚡ INSIGHT 3 (Product ➔ CS): Tech Debt Driving 6.8% Churn</strong>
-                <p>14 critical bugs open and a 21-day release cycle depress Customer Health to 71/100, putting 11 accounts at risk. Execute a 2-week Bug Freeze Sprint.</p>
+              
+              <!-- Card 3 -->
+              <div class="insight-card border-red" data-insight-id="3">
+                <div class="insight-card-header">
+                  <span class="insight-flow-badge prod-cs">Product ➔ CS</span>
+                  <span class="status-indicator red">🔴</span>
+                </div>
+                <h3 class="insight-card-title">⚡ INSIGHT 3: Tech Debt Driving 6.8% Churn</h3>
+                <div class="insight-metrics-box">
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Open Bugs</span>
+                    <span class="insight-metric-tag-value red">14 P0/P1</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Avg Health</span>
+                    <span class="insight-metric-tag-value yellow">71/100</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">At-Risk</span>
+                    <span class="insight-metric-tag-value red">11 Accts</span>
+                  </div>
+                </div>
+                <p class="insight-card-text">14 critical bugs open and a 21-day release cycle depress Customer Health to 71/100, putting 11 accounts at risk. Execute a 2-week Bug Freeze Sprint.</p>
+                <button class="btn-insight-action" data-action-text="Approve Bug Freeze">Approve Bug Freeze</button>
               </div>
-              <div class="insight-card border-yellow">
-                <strong>⚡ INSIGHT 4 (HR ➔ Velocity): High Attrition & 41-Day Hiring Bottleneck</strong>
-                <p>18% attrition and 41-day hiring leave 7 key roles open, slowing velocity. Streamline technical interview stages from 5 to 3.</p>
+              
+              <!-- Card 4 -->
+              <div class="insight-card border-yellow" data-insight-id="4">
+                <div class="insight-card-header">
+                  <span class="insight-flow-badge hr-vel">HR ➔ Velocity</span>
+                  <span class="status-indicator yellow">🟡</span>
+                </div>
+                <h3 class="insight-card-title">⚡ INSIGHT 4: High Attrition & 41d Hiring Gap</h3>
+                <div class="insight-metrics-box">
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Attrition</span>
+                    <span class="insight-metric-tag-value yellow">18%</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Open Roles</span>
+                    <span class="insight-metric-tag-value red">7 Positions</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Time-to-Fill</span>
+                    <span class="insight-metric-tag-value red">41 Days</span>
+                  </div>
+                </div>
+                <p class="insight-card-text">18% attrition and 41-day hiring leave 7 key roles open, slowing velocity. Streamline technical interview stages from 5 to 3 to expedite hires.</p>
+                <button class="btn-insight-action" data-action-text="Streamline Interview stages">Streamline Interview Stages</button>
               </div>
-              <div class="insight-card border-red">
-                <strong>⚡ INSIGHT 5 (Ops ➔ Leadership): Reporting Chaos Draining CEO Productivity</strong>
-                <p>27 manual reports/month signify extreme operational drag. Deploy an automated Data Warehouse ETL pipeline and BI dashboard.</p>
+              
+              <!-- Card 5 -->
+              <div class="insight-card border-red" data-insight-id="5">
+                <div class="insight-card-header">
+                  <span class="insight-flow-badge ops-lead">Ops ➔ Leadership</span>
+                  <span class="status-indicator red">🔴</span>
+                </div>
+                <h3 class="insight-card-title">⚡ INSIGHT 5: Reporting Drag Wasting CEO Time</h3>
+                <div class="insight-metrics-box">
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Manual Rpts</span>
+                    <span class="insight-metric-tag-value red">27/mo</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Hrs Wasted</span>
+                    <span class="insight-metric-tag-value red">60+ hrs/mo</span>
+                  </div>
+                  <div class="insight-metric-tag">
+                    <span class="insight-metric-tag-label">Ad-hoc Req</span>
+                    <span class="insight-metric-tag-value red">6-8/wk</span>
+                  </div>
+                </div>
+                <p class="insight-card-text">27 manual reports/month signify extreme operational drag. Deploy an automated Data Warehouse ETL pipeline and BI dashboard to recover executive time.</p>
+                <button class="btn-insight-action" data-action-text="Deploy ETL & Dashboard">Deploy ETL & Dashboard</button>
               </div>
+              
             </div>
           </div>
 
           <div id="slide-pane-6" class="slide-pane">
             <span class="slide-badge">SLIDE 6 OF 8 | PART C: AUTOMATION & DATA FLOW</span>
             <h2 class="slide-heading">Part C – Automation & Enterprise Data Architecture</h2>
-            <div class="info-callout">
-              <p><strong>Single Source of Truth Architecture:</strong> Operational Systems (Salesforce, HubSpot, Google Ads, Jira, Stripe, Lever) ➔ Automated ETL Ingestion (Fivetran/Airbyte Daily at 2 AM) ➔ Data Warehouse (Snowflake/BigQuery with dbt models) ➔ Automated BI Executive Dashboard.</p>
+            
+            <div class="pipeline-flow-container">
+              <div class="pipeline-flow-diagram">
+                
+                <!-- Stage 1: Data Sources -->
+                <div class="pipeline-node">
+                  <div class="pipeline-node-header">
+                    <span class="pipeline-node-icon">🔌</span>
+                    <span class="pipeline-node-title">1. Data Sources</span>
+                  </div>
+                  <div class="pipeline-node-items">
+                    <span class="pipeline-item-tag">HubSpot</span>
+                    <span class="pipeline-item-tag">Salesforce</span>
+                    <span class="pipeline-item-tag">Google Ads</span>
+                    <span class="pipeline-item-tag">Stripe</span>
+                    <span class="pipeline-item-tag">Jira</span>
+                    <span class="pipeline-item-tag">Lever</span>
+                  </div>
+                  <p class="pipeline-node-desc">Siloed systems tracking CRM, ads, billing, code, & hiring data.</p>
+                </div>
+                
+                <div class="pipeline-connector">
+                  <div class="pipeline-connector-line"></div>
+                </div>
+                
+                <!-- Stage 2: Ingest & ETL -->
+                <div class="pipeline-node">
+                  <div class="pipeline-node-header">
+                    <span class="pipeline-node-icon">🔄</span>
+                    <span class="pipeline-node-title">2. Ingest & ETL</span>
+                    <span class="pipeline-node-badge">Daily</span>
+                  </div>
+                  <div class="pipeline-node-items">
+                    <span class="pipeline-item-tag">Fivetran</span>
+                    <span class="pipeline-item-tag">Airbyte</span>
+                    <span class="pipeline-item-tag">2:00 AM Sync</span>
+                  </div>
+                  <p class="pipeline-node-desc">Automated ingestion pipelines moving raw data with zero manual effort.</p>
+                </div>
+                
+                <div class="pipeline-connector">
+                  <div class="pipeline-connector-line"></div>
+                </div>
+                
+                <!-- Stage 3: Analytics DW -->
+                <div class="pipeline-node">
+                  <div class="pipeline-node-header">
+                    <span class="pipeline-node-icon">🗄️</span>
+                    <span class="pipeline-node-title">3. Analytics DW</span>
+                  </div>
+                  <div class="pipeline-node-items">
+                    <span class="pipeline-item-tag">Snowflake</span>
+                    <span class="pipeline-item-tag">dbt Models</span>
+                    <span class="pipeline-item-tag">SSOT Schema</span>
+                  </div>
+                  <p class="pipeline-node-desc">Cleans, relations-maps, and aggregates variables into consolidated models.</p>
+                </div>
+                
+                <div class="pipeline-connector">
+                  <div class="pipeline-connector-line"></div>
+                </div>
+                
+                <!-- Stage 4: BI Dashboard -->
+                <div class="pipeline-node">
+                  <div class="pipeline-node-header">
+                    <span class="pipeline-node-icon">📊</span>
+                    <span class="pipeline-node-title">4. BI Dashboard</span>
+                    <span class="pipeline-node-badge">Real-time</span>
+                  </div>
+                  <div class="pipeline-node-items">
+                    <span class="pipeline-item-tag">ApexFlow UI</span>
+                    <span class="pipeline-item-tag">RAG Tickers</span>
+                    <span class="pipeline-item-tag">Decision Engine</span>
+                  </div>
+                  <p class="pipeline-node-desc">Feeds live charts & alert dashboards directly for CEO decision-making.</p>
+                </div>
+                
+              </div>
+              
+              <!-- Pipeline Live Health Metrics -->
+              <div class="pipeline-monitor">
+                <div class="monitor-item">
+                  <span class="monitor-item-label">ETL Ingestion Status</span>
+                  <span class="monitor-item-value"><span class="badge-dot"></span> Active 🟢</span>
+                </div>
+                <div class="monitor-item">
+                  <span class="monitor-item-label">Last Synchronization</span>
+                  <span class="monitor-item-value">Today @ 2:00 AM</span>
+                </div>
+                <div class="monitor-item">
+                  <span class="monitor-item-label">Average Data Latency</span>
+                  <span class="monitor-item-value">⚡ Real-time (Cached)</span>
+                </div>
+              </div>
             </div>
           </div>
 

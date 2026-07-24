@@ -33,6 +33,7 @@ class ApexFlowEngine {
     this.initSlideDeck();
     this.initFilterEngine();
     this.initChartRegistry();
+    this.initInsightActions();
   }
 
   /**
@@ -173,6 +174,62 @@ class ApexFlowEngine {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  /**
+   * 3.5 Interactive Action Items on Slide 5
+   */
+  initInsightActions() {
+    const actionButtons = document.querySelectorAll('.btn-insight-action');
+    actionButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('approved')) return;
+
+        btn.classList.add('approved');
+        btn.innerHTML = '✓ Approved & Scheduled';
+        
+        // Show interactive feedback
+        const card = btn.closest('.insight-card');
+        if (card) {
+          card.style.borderColor = 'var(--color-status-green)';
+          
+          // Toast or simple popup notification
+          const toast = document.createElement('div');
+          toast.style.position = 'fixed';
+          toast.style.bottom = '20px';
+          toast.style.right = '20px';
+          toast.style.background = '#10B981';
+          toast.style.color = '#FFFFFF';
+          toast.style.padding = '10px 16px';
+          toast.style.borderRadius = '6px';
+          toast.style.fontSize = '0.8rem';
+          toast.style.fontWeight = '600';
+          toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+          toast.style.zIndex = '1000';
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(10px)';
+          toast.style.transition = 'all 0.3s ease';
+          
+          const actionText = btn.getAttribute('data-action-text') || 'Action';
+          toast.textContent = `🚀 "${actionText}" approved & scheduled for execution.`;
+          
+          document.body.appendChild(toast);
+          
+          // Trigger entry animation
+          setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+          }, 50);
+          
+          // Auto remove
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(10px)';
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
         }
       });
     });
